@@ -42,7 +42,7 @@ export class UsersController {
   @ApiTags('Users')
   @ApiOperation({ summary: 'Remove a user' })
   @ApiParam({ name: 'id', description: 'User unique ID', example: 1, required: true })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.usersService.remove(+id);
   }
 }

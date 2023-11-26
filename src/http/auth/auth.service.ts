@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { matchPassword } from '../../helpers';
 import { User } from '../users/entities/user.entity';
 import { SignInDto } from './dto/signin.dto';
+import { JwtPayload } from './jwt-payload';
 
 @Injectable()
 export class AuthService {
@@ -16,16 +17,11 @@ export class AuthService {
   ) { }
 
   /**
-   * Returns the response for API
-   * @param user 
-   * @returns Partial<User>
+   * Sign in user using DTO information
+   * @param signInDto sign in DTO
+   * @returns Promise<JwtPayload>
    */
-  private toResponseObject(user: User): Partial<User> {
-    const { email } = user;
-    return { email };
-  }
-
-  async signIn(signInDto: SignInDto): Promise<unknown> {
+  async signIn(signInDto: SignInDto): Promise<JwtPayload> {
     const user = await this.userRepository.findOneBy({ email: signInDto.email })
 
     if (!user) {
@@ -39,12 +35,20 @@ export class AuthService {
         throw new UnauthorizedException()
       }
 
+      const payload = {
+        email: user.email,
+      }
+
       return {
-        access_token: await this.jwtService.signAsync(this.toResponseObject(user)),
-        ttl: this.configService.get('JWT_TTL') || "60s"
+        access_token: await this.jwtService.signAsync(payload),
+        ttl: this.configService.get('JWT_TTL') || "900s"
       }
     } catch (error) {
       throw new Error(error)
     }
+  }
+
+  async validateUserByJwt(payload: JwtPayload): Promise<any> {
+    return null;
   }
 }
