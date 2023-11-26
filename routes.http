@@ -1,0 +1,4 @@
+# @name index
+GET http://localhost:{{$dotenv APP_PORT}}
+
+###
