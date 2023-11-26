@@ -9,7 +9,7 @@ export class AppController {
   @Get()
   @ApiOperation({
     summary: 'Application basic information',
-    tags: ['Application Info']
+    tags: ['Application Info'],
   })
   index(): object {
     return this.appService.index();

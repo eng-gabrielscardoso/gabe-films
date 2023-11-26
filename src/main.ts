@@ -9,7 +9,10 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle(secrets.get('APP_NAME'))
     .setDescription(secrets.get('APP_DESCRIPTION'))
-    .setLicense("MIT", "https://github.com/eng-gabrielscardoso/gabe-films/blob/main/LICENSE")
+    .setLicense(
+      'MIT',
+      'https://github.com/eng-gabrielscardoso/gabe-films/blob/main/LICENSE',
+    )
     .setVersion(secrets.get('APP_VERSION'))
     .build();
   const document = SwaggerModule.createDocument(app, config);
