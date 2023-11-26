@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { encodePassword } from 'src/helpers';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -16,7 +17,7 @@ export class UsersService {
    * @param createUserDto incoming user DTO
    * @returns Promise<User>
    */
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     try {
       const user: User = new User()
       const { age, email, name, nickname, password } = createUserDto
@@ -25,11 +26,11 @@ export class UsersService {
       user.email = email
       user.name = name
       user.nickname = nickname
-      user.password = password
+      user.password = await encodePassword(password);
 
-      const result = await this.userRepository.save(user);
+      const newUser = await this.userRepository.save(user);
 
-      return result;
+      return await this.userRepository.findOneBy({ id: newUser.id })
     } catch (error) {
       throw new Error(error)
     }
@@ -40,7 +41,11 @@ export class UsersService {
    * @returns Promise<User[]>
    */
   findAll(): Promise<User[]> {
-    return this.userRepository.find();
+    try {
+      return this.userRepository.find();
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 
   /**
@@ -49,7 +54,11 @@ export class UsersService {
    * @returns Promise<User>
    */
   findOne(id: number): Promise<User> {
-    return this.userRepository.findOneBy({ id })
+    try {
+      return this.userRepository.findOneBy({ id })
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 
   /**
@@ -63,7 +72,7 @@ export class UsersService {
       const existingUser = await this.userRepository.findOneBy({ id });
 
       if (!existingUser) {
-        throw new Error('User not found');
+        throw new NotFoundException();
       }
 
       const { age, email, name, nickname, password } = updateUserDto;
@@ -72,13 +81,13 @@ export class UsersService {
       existingUser.email = email;
       existingUser.name = name;
       existingUser.nickname = nickname;
-      existingUser.password = password;
+      existingUser.password = await encodePassword(password);;
 
-      const result = await this.userRepository.save(existingUser);
+      await this.userRepository.save(existingUser);
 
-      return result;
+      return await this.userRepository.findOneBy({ id });
     } catch (error) {
-      throw error
+      throw new Error(error)
     }
   }
 
@@ -88,6 +97,16 @@ export class UsersService {
    * @returns Promise<{ affected?: number}>
    */
   async remove(id: number): Promise<{ affected?: number }> {
-    return await this.userRepository.delete(id)
+    try {
+      const existingUser = await this.userRepository.findOneBy({ id });
+
+      if (!existingUser) {
+        throw new NotFoundException();
+      }
+
+      return await this.userRepository.delete(id)
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 }
