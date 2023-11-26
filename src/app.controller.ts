@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AppService } from './app.service';
 
 @Controller()
@@ -7,11 +7,9 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @ApiOperation({
-    summary: 'Application basic information',
-    tags: ['Application Info'],
-  })
-  index(): object {
-    return this.appService.index();
+  @ApiTags('Info')
+  @ApiOperation({ summary: 'Application basic information' })
+  getBasicApplicationInfo(): object {
+    return this.appService.getBasicApplicationInfo();
   }
 }

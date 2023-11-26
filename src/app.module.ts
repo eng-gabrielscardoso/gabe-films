@@ -4,7 +4,8 @@ import { TerminusModule } from '@nestjs/terminus';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { HealthController } from './health/health.controller';
+import { HealthModule } from './http/health/health.module';
+import { UsersModule } from './http/users/users.module';
 
 @Module({
   imports: [
@@ -18,10 +19,12 @@ import { HealthController } from './health/health.controller';
       username: process.env.DB_USERNAME,
       database: process.env.DB_DATABASE,
       synchronize: process.env.APP_ENV === 'production' ? false : true,
-      logging: process.env.APP_ENV === 'production' ? false : true,
+      autoLoadEntities: true,
     }),
+    HealthModule,
+    UsersModule,
   ],
-  controllers: [AppController, HealthController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
