@@ -12,6 +12,11 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>
   ) { }
 
+  /**
+   * Returns the response for API
+   * @param user 
+   * @returns Partial<User>
+   */
   private toResponseObject(user: User): Partial<User> {
     const { id, name, nickname, email, age } = user;
     return { id, name, nickname, email, age };
