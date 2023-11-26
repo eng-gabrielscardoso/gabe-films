@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:alpine'
+    container_name: 'postgres'
+    environment:
+      POSTGRES_DB: '${DB_DATABASE}'
+      POSTGRES_USER: '${DB_USERNAME}'
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+    ports:
+      - '${FORWARD_DB_PORT:-5432}:5432'
+    volumes:
+      - 'postgres-data:/var/lib/postgresql/data'
+    networks:
+      - 'gabe-films-network'
+
+  redis:
+    image: 'redis:alpine'
+    container_name: 'redis'
+    ports:
+      - '${FORWARD_CACHE_PORT:-6379}:6379'
+    volumes:
+      - 'redis-data:/data'
+    networks:
+      - gabe-films-network
+
+volumes:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  gabe-films-network:
+    driver: bridge
