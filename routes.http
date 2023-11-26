@@ -2,3 +2,6 @@
 GET http://localhost:{{$dotenv APP_PORT}}
 
 ###
+
+# @name health
+GET http://localhost:{{$dotenv APP_PORT}}/health

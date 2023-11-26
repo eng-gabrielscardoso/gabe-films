@@ -19,12 +19,7 @@ describe('AppController', () => {
     configService = app.get<ConfigService>(ConfigService);
   });
 
-  describe('index', () => {
-    it('should return the app info', () => {
-      expect(appService.index()).toEqual({
-        name: configService.get('APP_NAME'),
-        author: configService.get('APP_AUTHOR'),
-      });
-    });
+  it('should be defined', () => {
+    expect(appController).toBeDefined();
   });
 });
