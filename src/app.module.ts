@@ -4,6 +4,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './http/auth/auth.module';
 import { HealthModule } from './http/health/health.module';
 import { UsersModule } from './http/users/users.module';
 
@@ -21,6 +22,7 @@ import { UsersModule } from './http/users/users.module';
       synchronize: process.env.APP_ENV === 'production' ? false : true,
       autoLoadEntities: true,
     }),
+    AuthModule,
     HealthModule,
     UsersModule,
   ],

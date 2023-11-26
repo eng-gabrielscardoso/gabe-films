@@ -12,12 +12,17 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>
   ) { }
 
+  private toResponseObject(user: User): Partial<User> {
+    const { id, name, nickname, email, age } = user;
+    return { id, name, nickname, email, age };
+  }
+
   /**
    * Create a new user
    * @param createUserDto incoming user DTO
    * @returns Promise<User>
    */
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<Partial<User>> {
     try {
       const user: User = new User()
       const { age, email, name, nickname, password } = createUserDto
@@ -30,7 +35,7 @@ export class UsersService {
 
       const newUser = await this.userRepository.save(user);
 
-      return await this.userRepository.findOneBy({ id: newUser.id })
+      return this.toResponseObject(await this.userRepository.findOneBy({ id: newUser.id }))
     } catch (error) {
       throw new Error(error)
     }
@@ -38,13 +43,14 @@ export class UsersService {
 
   /**
    * Returns a list of users
-   * @returns Promise<User[]>
+   * @returns Promise<Partial<User>[]>
    */
-  findAll(): Promise<User[]> {
+  async findAll(): Promise<Partial<User>[]> {
     try {
-      return this.userRepository.find();
+      const users = await this.userRepository.find();
+      return users.map(user => this.toResponseObject(user));
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
@@ -53,11 +59,15 @@ export class UsersService {
    * @param id incoming user id
    * @returns Promise<User>
    */
-  findOne(id: number): Promise<User> {
+  async findOne(id: number): Promise<Partial<User>> {
     try {
-      return this.userRepository.findOneBy({ id })
+      const user = await this.userRepository.findOneBy({ id });
+      if (!user) {
+        throw new NotFoundException();
+      }
+      return this.toResponseObject(user);
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
@@ -67,7 +77,7 @@ export class UsersService {
    * @param updateUserDto incoming user DTO
    * @returns Promise<User>
    */
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<Partial<User>> {
     try {
       const existingUser = await this.userRepository.findOneBy({ id });
 
@@ -81,13 +91,13 @@ export class UsersService {
       existingUser.email = email;
       existingUser.name = name;
       existingUser.nickname = nickname;
-      existingUser.password = await encodePassword(password);;
+      existingUser.password = await encodePassword(password);
 
       await this.userRepository.save(existingUser);
 
-      return await this.userRepository.findOneBy({ id });
+      return this.toResponseObject(await this.userRepository.findOneBy({ id }));
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
@@ -104,9 +114,9 @@ export class UsersService {
         throw new NotFoundException();
       }
 
-      return await this.userRepository.delete(id)
+      return await this.userRepository.delete(id);
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 }

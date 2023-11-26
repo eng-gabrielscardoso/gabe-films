@@ -18,6 +18,6 @@ export class User extends BaseEntity{
   @Column({ type: 'int' })
   age: number;
 
-  @Column({ type: 'varchar', select: false })
+  @Column({ type: 'varchar' })
   password: string;
 }
