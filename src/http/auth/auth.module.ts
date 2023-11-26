@@ -13,12 +13,12 @@ import { JwtStrategy } from './jwt.strategy';
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
       global: true,
-      secret: process.env.JWT_KEY || "supersecret",
+      secret: process.env.JWT_KEY || 'supersecret',
       signOptions: { expiresIn: process.env.JWT_TTL || '900s' },
     }),
     PassportModule.register({ defaultStrategy: 'jwt' }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, ConfigService, JwtStrategy]
+  providers: [AuthService, ConfigService, JwtStrategy],
 })
-export class AuthModule { }
+export class AuthModule {}

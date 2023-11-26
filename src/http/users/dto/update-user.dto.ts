@@ -9,7 +9,7 @@ import {
   Max,
   MaxLength,
   Min,
-  MinLength
+  MinLength,
 } from 'class-validator';
 import { passwordRegEx } from '../../../helpers';
 import { CreateUserDto } from './create-user.dto';
@@ -19,7 +19,10 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsOptional()
   @MinLength(2, { message: 'Name must have at least 2 characters.' })
   @MaxLength(80, { message: 'Name must have at most 80 characters.' })
-  @ApiProperty({ example: 'Gabriel Santos Cardoso', description: 'User real name' })
+  @ApiProperty({
+    example: 'Gabriel Santos Cardoso',
+    description: 'User real name',
+  })
   name?: string;
 
   @IsOptional()

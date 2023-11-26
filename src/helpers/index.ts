@@ -7,13 +7,14 @@ import * as bcrypt from 'bcrypt';
 export const passwordRegEx =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,20}$/;
 
-  /**
-   * Encrypt a password using bcrypt module
-   * @see https://www.npmjs.com/package/bcrypt
-   * @param rawPassword incoming raw password
-   * @returns Promise<string>
-   */
-export const encodePassword = async (rawPassword: string): Promise<string> => await bcrypt.hash(rawPassword, 10)
+/**
+ * Encrypt a password using bcrypt module
+ * @see https://www.npmjs.com/package/bcrypt
+ * @param rawPassword incoming raw password
+ * @returns Promise<string>
+ */
+export const encodePassword = async (rawPassword: string): Promise<string> =>
+  await bcrypt.hash(rawPassword, 10);
 
 /**
  * Evaluate if the password matches the hash
@@ -22,4 +23,7 @@ export const encodePassword = async (rawPassword: string): Promise<string> => aw
  * @param hash database saved hash
  * @returns Promise<boolean>
  */
-export const matchPassword = async (rawPassword: string, hash: string): Promise<boolean> => await bcrypt.compare(rawPassword, hash)
+export const matchPassword = async (
+  rawPassword: string,
+  hash: string,
+): Promise<boolean> => await bcrypt.compare(rawPassword, hash);

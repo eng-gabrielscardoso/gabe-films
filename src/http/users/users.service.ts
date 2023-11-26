@@ -9,12 +9,12 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>
-  ) { }
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
 
   /**
    * Returns the response for API
-   * @param user 
+   * @param user
    * @returns Partial<User>
    */
   private toResponseObject(user: User): Partial<User> {
@@ -29,20 +29,22 @@ export class UsersService {
    */
   async create(createUserDto: CreateUserDto): Promise<Partial<User>> {
     try {
-      const user: User = new User()
-      const { age, email, name, nickname, password } = createUserDto
+      const user: User = new User();
+      const { age, email, name, nickname, password } = createUserDto;
 
-      user.age = age
-      user.email = email
-      user.name = name
-      user.nickname = nickname
+      user.age = age;
+      user.email = email;
+      user.name = name;
+      user.nickname = nickname;
       user.password = await encodePassword(password);
 
       const newUser = await this.userRepository.save(user);
 
-      return this.toResponseObject(await this.userRepository.findOneBy({ id: newUser.id }))
+      return this.toResponseObject(
+        await this.userRepository.findOneBy({ id: newUser.id }),
+      );
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
@@ -53,7 +55,7 @@ export class UsersService {
   async findAll(): Promise<Partial<User>[]> {
     try {
       const users = await this.userRepository.find();
-      return users.map(user => this.toResponseObject(user));
+      return users.map((user) => this.toResponseObject(user));
     } catch (error) {
       throw new Error(error);
     }
@@ -82,7 +84,10 @@ export class UsersService {
    * @param updateUserDto incoming user DTO
    * @returns Promise<User>
    */
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<Partial<User>> {
+  async update(
+    id: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<Partial<User>> {
     try {
       const existingUser = await this.userRepository.findOneBy({ id });
 

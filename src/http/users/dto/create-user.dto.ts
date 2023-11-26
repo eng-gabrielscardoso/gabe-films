@@ -9,7 +9,7 @@ import {
   Max,
   MaxLength,
   Min,
-  MinLength
+  MinLength,
 } from 'class-validator';
 import { passwordRegEx } from '../../../helpers';
 
@@ -18,7 +18,10 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(2, { message: 'Name must have at least 2 characters.' })
   @MaxLength(80, { message: 'Name must have at most 80 characters.' })
-  @ApiProperty({ example: 'Gabriel Santos Cardoso', description: 'User real name' })
+  @ApiProperty({
+    example: 'Gabriel Santos Cardoso',
+    description: 'User real name',
+  })
   name: string;
 
   @IsNotEmpty()
@@ -36,8 +39,8 @@ export class CreateUserDto {
   email: string;
 
   @IsInt()
-  @Min(18, { message: 'You must be at least 18 years old.'})
-  @Max(118, { message: 'Invalid age.'})
+  @Min(18, { message: 'You must be at least 18 years old.' })
+  @Max(118, { message: 'Invalid age.' })
   @ApiProperty({ example: 21, description: 'User age' })
   age: number;
 

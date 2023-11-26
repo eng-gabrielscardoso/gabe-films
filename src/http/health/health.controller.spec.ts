@@ -10,7 +10,7 @@ describe('HealthController', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [TerminusModule],
       controllers: [HealthController],
-      providers: [HealthService]
+      providers: [HealthService],
     }).compile();
 
     healthController = module.get<HealthController>(HealthController);

@@ -5,12 +5,12 @@ import { SignInDto } from './dto/signin.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   @ApiTags('Auth')
   @ApiOperation({ summary: 'Authenticate with email and password' })
   login(@Body() signInDto: SignInDto) {
-    return this.authService.signIn(signInDto)
+    return this.authService.signIn(signInDto);
   }
 }

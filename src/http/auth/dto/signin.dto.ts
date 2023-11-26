@@ -1,10 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, Matches } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, Matches } from 'class-validator';
 import { passwordRegEx } from '../../../helpers';
 
 export class SignInDto {
   @IsNotEmpty()
-  @IsEmail(null, { message: 'Please enter your email.'})
+  @IsEmail(null, { message: 'Please enter your email.' })
   @ApiProperty({ example: 'gabriel@example.com', description: 'User email' })
   email: string;
 

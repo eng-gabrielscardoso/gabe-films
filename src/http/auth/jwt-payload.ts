@@ -1,4 +1,4 @@
 export interface JwtPayload {
-  access_token: string
-  ttl: string
+  access_token: string;
+  ttl: string;
 }

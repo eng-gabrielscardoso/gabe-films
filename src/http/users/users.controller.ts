@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -25,7 +33,12 @@ export class UsersController {
   @Get(':id')
   @ApiTags('Users')
   @ApiOperation({ summary: 'Find a user by given ID' })
-  @ApiParam({ name: 'id', description: 'User unique ID', example: 1, required: true })
+  @ApiParam({
+    name: 'id',
+    description: 'User unique ID',
+    example: 1,
+    required: true,
+  })
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
@@ -33,7 +46,12 @@ export class UsersController {
   @Patch(':id')
   @ApiTags('Users')
   @ApiOperation({ summary: 'Update a user' })
-  @ApiParam({ name: 'id', description: 'User unique ID', example: 1, required: true })
+  @ApiParam({
+    name: 'id',
+    description: 'User unique ID',
+    example: 1,
+    required: true,
+  })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
@@ -41,7 +59,12 @@ export class UsersController {
   @Delete(':id')
   @ApiTags('Users')
   @ApiOperation({ summary: 'Remove a user' })
-  @ApiParam({ name: 'id', description: 'User unique ID', example: 1, required: true })
+  @ApiParam({
+    name: 'id',
+    description: 'User unique ID',
+    example: 1,
+    required: true,
+  })
   remove(@Param('id') id: number) {
     return this.usersService.remove(+id);
   }

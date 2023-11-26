@@ -13,8 +13,8 @@ export class AuthService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
-    private readonly configService: ConfigService
-  ) { }
+    private readonly configService: ConfigService,
+  ) {}
 
   /**
    * Sign in user using DTO information
@@ -22,29 +22,34 @@ export class AuthService {
    * @returns Promise<JwtPayload>
    */
   async signIn(signInDto: SignInDto): Promise<JwtPayload> {
-    const user = await this.userRepository.findOneBy({ email: signInDto.email })
+    const user = await this.userRepository.findOneBy({
+      email: signInDto.email,
+    });
 
     if (!user) {
-      throw new UnauthorizedException()
+      throw new UnauthorizedException();
     }
 
     try {
-      const isPasswordMatch = await matchPassword(signInDto.password, user.password)
+      const isPasswordMatch = await matchPassword(
+        signInDto.password,
+        user.password,
+      );
 
       if (!isPasswordMatch) {
-        throw new UnauthorizedException()
+        throw new UnauthorizedException();
       }
 
       const payload = {
         email: user.email,
-      }
+      };
 
       return {
         access_token: await this.jwtService.signAsync(payload),
-        ttl: this.configService.get('JWT_TTL') || "900s"
-      }
+        ttl: this.configService.get('JWT_TTL') || '900s',
+      };
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
