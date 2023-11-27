@@ -25,7 +25,7 @@ export class UsersService {
   /**
    * Create a new user
    * @param createUserDto incoming user DTO
-   * @returns Promise<User>
+   * @returns Promise<Partial<User>>
    */
   async create(createUserDto: CreateUserDto): Promise<Partial<User>> {
     try {
@@ -64,7 +64,7 @@ export class UsersService {
   /**
    * Returns a user by its id
    * @param id incoming user id
-   * @returns Promise<User>
+   * @returns Promise<Partial<User>>
    */
   async findOne(id: number): Promise<Partial<User>> {
     try {
@@ -82,7 +82,7 @@ export class UsersService {
    * Update a user by its id
    * @param id incoming user id
    * @param updateUserDto incoming user DTO
-   * @returns Promise<User>
+   * @returns Promise<Partial<User>>
    */
   async update(
     id: number,
