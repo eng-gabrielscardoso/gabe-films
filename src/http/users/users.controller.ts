@@ -13,25 +13,23 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
+@ApiTags('Users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post()
-  @ApiTags('Users')
   @ApiOperation({ summary: 'Create a new user' })
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @Get()
-  @ApiTags('Users')
   @ApiOperation({ summary: 'List all users' })
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
-  @ApiTags('Users')
   @ApiOperation({ summary: 'Find a user by given ID' })
   @ApiParam({
     name: 'id',
@@ -44,7 +42,6 @@ export class UsersController {
   }
 
   @Patch(':id')
-  @ApiTags('Users')
   @ApiOperation({ summary: 'Update a user' })
   @ApiParam({
     name: 'id',
@@ -57,7 +54,6 @@ export class UsersController {
   }
 
   @Delete(':id')
-  @ApiTags('Users')
   @ApiOperation({ summary: 'Remove a user' })
   @ApiParam({
     name: 'id',
