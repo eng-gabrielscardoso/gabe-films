@@ -1,7 +1,9 @@
+import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TerminusModule } from '@nestjs/terminus';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as RedisStore from 'cache-manager-redis-store';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './http/auth/auth.module';
@@ -22,6 +24,12 @@ import { UsersModule } from './http/users/users.module';
       database: process.env.DB_DATABASE,
       synchronize: process.env.APP_ENV === 'production' ? false : true,
       autoLoadEntities: true,
+    }),
+    CacheModule.register({
+      isGlobal: true,
+      store: RedisStore,
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
     }),
     AuthModule,
     FilmsModule,
