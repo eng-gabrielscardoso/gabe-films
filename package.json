@@ -1,6 +1,6 @@
 {
   "name": "gabe-films",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Films API CRUD made with NestJS, TypeORM, Swagger, Docker, Redis and PostgreSQL",
   "author": "Gabriel Santos Cardoso",
   "private": true,
