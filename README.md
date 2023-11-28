@@ -1,73 +1,50 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Gabe Films
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<div align="center">
+  <img src="https://skills.thijs.gg/icons?i=nodejs,nestjs,js,ts,docker,postgresql,redis,linux,vscode,github,markdown" />
+</div>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<div align="center">
+  <span style="font-size:1.25rem;"> Films API REST CRUD with authentication service</span>
+</div>
+
+---
+
+- [Gabe Films](#gabe-films)
+  - [Description](#description)
+  - [Authors](#authors)
+  - [Architecture](#architecture)
+  - [Contributing](#contributing)
+  - [Code of conduct](#code-of-conduct)
+  - [Security](#security)
+  - [Licence](#licence)
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**Gabe Films** is simple API REST CRUD made using modern technologies to provide a authentication, cached and interoperable service using [Render](https://render.com).
 
-## Installation
+## Authors
 
-```bash
-$ pnpm install
-```
+By order of contribution:
 
-## Running the app
+- Gabriel Santos Cardoso - [eng.gabrielscardoso@gmail.com](mailto:eng.gabrielscardoso@gmail.com)
 
-```bash
-# development
-$ pnpm run start
+## Architecture
 
-# watch mode
-$ pnpm run start:dev
+**Gabe Films** is a backend monolithic application, developed using built-in NestJS services and patterns.
 
-# production mode
-$ pnpm run start:prod
-```
+## Contributing
 
-## Test
+To contribute to this project just read the following documentation to follow the instructions to install project, develop and contribute. See the complete documentation [here.](CONTRIBUTING.md)
 
-```bash
-# unit tests
-$ pnpm run test
+## Code of conduct
 
-# e2e tests
-$ pnpm run test:e2e
+**Gabe Films** is a free open source project, developed with no restrictions or strong copyright. To maintain this policy please follow the instructions present in our [Code of Conduct.](CODE_OF_CONDUCT.md)
 
-# test coverage
-$ pnpm run test:cov
-```
+## Security
 
-## Support
+In order to enforce security requirements, please follow the instructions present in our [Security Policy.](SECURITY.md)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Licence
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the [MIT Licence](LICENSE)
