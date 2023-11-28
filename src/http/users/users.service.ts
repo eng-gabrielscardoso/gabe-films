@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { isEmpty } from 'lodash';
 import { encodePassword } from 'src/helpers';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -69,7 +70,7 @@ export class UsersService {
   async findOne(id: number): Promise<Partial<User>> {
     try {
       const user = await this.userRepository.findOneBy({ id });
-      if (!user) {
+      if (isEmpty(user)) {
         throw new NotFoundException();
       }
       return this.toResponseObject(user);
@@ -91,17 +92,31 @@ export class UsersService {
     try {
       const existingUser = await this.userRepository.findOneBy({ id });
 
-      if (!existingUser) {
+      if (isEmpty(existingUser)) {
         throw new NotFoundException();
       }
 
       const { age, email, name, nickname, password } = updateUserDto;
 
-      existingUser.age = age;
-      existingUser.email = email;
-      existingUser.name = name;
-      existingUser.nickname = nickname;
-      existingUser.password = await encodePassword(password);
+      if (!isEmpty(age)) {
+        existingUser.age = age;
+      }
+
+      if (!isEmpty(email)) {
+        existingUser.email = email;
+      }
+
+      if (!isEmpty(name)) {
+        existingUser.name = name;
+      }
+
+      if (!isEmpty(nickname)) {
+        existingUser.nickname = nickname;
+      }
+
+      if (!isEmpty(password)) {
+        existingUser.password = await encodePassword(password);
+      }
 
       await this.userRepository.save(existingUser);
 
@@ -120,7 +135,7 @@ export class UsersService {
     try {
       const existingUser = await this.userRepository.findOneBy({ id });
 
-      if (!existingUser) {
+      if (isEmpty(existingUser)) {
         throw new NotFoundException();
       }
 

@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
+import { isEmpty } from 'lodash';
 import { Repository } from 'typeorm';
 import { matchPassword } from '../../helpers';
 import { User } from '../users/entities/user.entity';
@@ -26,7 +27,7 @@ export class AuthService {
       email: signInDto.email,
     });
 
-    if (!user) {
+    if (isEmpty(user)) {
       throw new UnauthorizedException();
     }
 

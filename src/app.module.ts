@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './http/auth/auth.module';
+import { FilmsModule } from './http/films/films.module';
 import { HealthModule } from './http/health/health.module';
 import { UsersModule } from './http/users/users.module';
 
@@ -23,6 +24,7 @@ import { UsersModule } from './http/users/users.module';
       autoLoadEntities: true,
     }),
     AuthModule,
+    FilmsModule,
     HealthModule,
     UsersModule,
   ],
