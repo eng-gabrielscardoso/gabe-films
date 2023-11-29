@@ -8,8 +8,6 @@
   <span style="font-size:1.25rem;"> Films API REST CRUD with authentication service</span>
 </div>
 
----
-
 - [Gabe Films](#gabe-films)
   - [Description](#description)
   - [Authors](#authors)
